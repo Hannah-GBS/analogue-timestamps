@@ -1,13 +1,13 @@
-package com.emojitimestamps;
+package com.analoguetimestamps;
 
 import net.runelite.client.RuneLite;
 import net.runelite.client.externalplugins.ExternalPluginManager;
 
-public class EmojiTimestampsPluginTest
+public class AnalogueTimestampsPluginTest
 {
 	public static void main(String[] args) throws Exception
 	{
-		ExternalPluginManager.loadBuiltin(EmojiTimestampsPlugin.class);
+		ExternalPluginManager.loadBuiltin(AnalogueTimestampsPlugin.class);
 		RuneLite.main(args);
 	}
 }

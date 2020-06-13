@@ -127,7 +127,6 @@ public class AnalogueTimestampsPlugin extends Plugin
 		client.refreshChat();
 	}*/
 
-	@Nullable
 	String getTimestamp(final MessageNode messageNode)
 	{
 		final String filename = generateRoundedTimestamp(messageNode.getTimestamp(), ZoneId.systemDefault());

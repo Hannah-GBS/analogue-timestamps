@@ -1,7 +1,5 @@
 package com.analoguetimestamps;
 
-import com.google.inject.Provides;
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -10,21 +8,17 @@ import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.Date;
 import javax.inject.Inject;
-import jdk.internal.jline.internal.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.IndexedSprite;
 import net.runelite.api.MessageNode;
-import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.ScriptCallbackEvent;
 import net.runelite.client.chat.ChatMessageManager;
-import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.util.ColorUtil;
 import net.runelite.client.util.ImageUtil;
 
 @Slf4j

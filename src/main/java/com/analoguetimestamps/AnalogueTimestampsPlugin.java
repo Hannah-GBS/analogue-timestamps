@@ -15,6 +15,7 @@ import net.runelite.api.IndexedSprite;
 import net.runelite.api.MessageNode;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.ScriptCallbackEvent;
+import net.runelite.client.callback.ClientThread;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
@@ -35,6 +36,9 @@ public class AnalogueTimestampsPlugin extends Plugin
 	@Inject
 	private ChatMessageManager chatMessageManager;
 
+	@Inject
+	private ClientThread clientThread;
+
 	private SimpleDateFormat formatter;
 	private int modIconsStart = -1;
 
@@ -42,6 +46,7 @@ public class AnalogueTimestampsPlugin extends Plugin
 	protected void startUp() throws Exception
 	{
 		updateFormatter();
+		clientThread.invoke(this::loadAnalogueTimestampIcons);
 	}
 
 	@Override
@@ -87,39 +92,6 @@ public class AnalogueTimestampsPlugin extends Plugin
 		}
 		client.setModIcons(newModIcons);
 	}
-
-/*	@Subscribe
-	public void onChatMessage(ChatMessage chatMessage)
-	{
-		if (client.getGameState() != GameState.LOGGED_IN || modIconsStart == -1)
-		{
-			return;
-		}
-
-		switch (chatMessage.getType())
-		{
-			case PUBLICCHAT:
-			case MODCHAT:
-			case FRIENDSCHAT:
-			case PRIVATECHAT:
-			case PRIVATECHATOUT:
-			case MODPRIVATECHAT:
-				break;
-			default:
-				return;
-		}
-
-		final MessageNode messageNode = chatMessage.getMessageNode();
-		final String timestamp = getTimestamp(messageNode);
-		log.warn(timestamp);
-		final String name = messageNode.getName();
-		log.warn(name);
-		messageNode.setName(timestamp + name);
-		log.warn(messageNode.getName());
-
-		chatMessageManager.update(messageNode);
-		client.refreshChat();
-	}*/
 
 	String getTimestamp(final MessageNode messageNode)
 	{

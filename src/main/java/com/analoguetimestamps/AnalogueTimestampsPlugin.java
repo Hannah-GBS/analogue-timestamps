@@ -39,13 +39,12 @@ public class AnalogueTimestampsPlugin extends Plugin
 	@Inject
 	private ClientThread clientThread;
 
-	private SimpleDateFormat formatter;
+	private SimpleDateFormat formatter = new SimpleDateFormat("hhmm");
 	private int modIconsStart = -1;
 
 	@Override
 	protected void startUp() throws Exception
 	{
-		updateFormatter();
 		clientThread.invoke(this::loadAnalogueTimestampIcons);
 	}
 
@@ -111,32 +110,21 @@ public class AnalogueTimestampsPlugin extends Plugin
 		return String.valueOf(5 * ((Integer.parseInt(stringTimestamp)) / 5));
 	}
 
-	private void updateFormatter()
-	{
-		formatter = new SimpleDateFormat("hhmm");
-
-	}
 
 	@Subscribe(priority = -1)
 	public void onScriptCallbackEvent(ScriptCallbackEvent event)
 	{
-		if (!event.getEventName().equals("addTimestamp"))
+		if (!"chatMessageBuilding".equals(event.getEventName()))
 		{
 			return;
 		}
 
-		int[] intStack = client.getIntStack();
-		int intStackSize = client.getIntStackSize();
-
-		String[] stringStack = client.getStringStack();
-		int stringStackSize = client.getStringStackSize();
-
-		int messageId = intStack[intStackSize - 1];
-
-		MessageNode messageNode = client.getMessages().get(messageId);
+		int uid = client.getIntStack()[client.getIntStackSize() - 1];
+		final MessageNode messageNode = client.getMessages().get(uid);
+		assert messageNode != null : "chat message build for unknown message";
 
 		String timestamp = getTimestamp(messageNode);
 
-		stringStack[stringStackSize - 1] += timestamp;
+		client.getStringStack()[client.getStringStackSize() - 1] = timestamp + client.getStringStack()[client.getStringStackSize() - 1];
 	}
 }

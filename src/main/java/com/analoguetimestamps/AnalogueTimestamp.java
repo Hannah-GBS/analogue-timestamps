@@ -176,7 +176,7 @@ enum AnalogueTimestamp
 
 	BufferedImage loadImage()
 	{
-		return ImageUtil.getResourceStreamFromClass(getClass(),this.filename + ".png");
+		return ImageUtil.loadImageResource(getClass(), this.filename + ".png");
 	}
 
 	static AnalogueTimestamp getAnalogueTimestamp(String filename)

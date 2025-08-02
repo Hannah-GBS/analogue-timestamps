@@ -125,6 +125,6 @@ public class AnalogueTimestampsPlugin extends Plugin
 
 		String timestamp = getTimestamp(messageNode);
 
-		client.getStringStack()[client.getStringStackSize() - 1] = timestamp + client.getStringStack()[client.getStringStackSize() - 1];
+		client.getObjectStack()[client.getObjectStackSize() - 1] = timestamp + client.getObjectStack()[client.getObjectStackSize() - 1];
 	}
 }
